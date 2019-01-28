@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<!-- <meta http-equiv="X-UA-Compatible" content="IE=8" /> -->
+
+	<title>De Anza Oaks</title>
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/aos.css">
+	<link rel="stylesheet" type="text/css" href="css/masterslider.main.css">
+	<link rel="stylesheet" type="text/css" href="css/ms-skin-sample.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/public.css">
+
+	<!-- 日历插件 -->
+	<link rel="stylesheet" href="css/calendar.css">
+
+	<!--<script src="http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js" type="text/ecmascript"></script>-->
+
+	<!--[if IE 8]>
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <![endif]-->
+
+	<!--[if lte IE 7]>
+    <script type="text/javascript">
+        var isIE7 = true;
+    </script>
+	<![endif]-->
+	<style>
+		html,body{
+		height:100%;
+		}
+		.main{
+			height: 90%;
+		}
+		.main-left-content{
+			width: 421px;
+			height: 225px;
+			box-shadow:  0 0 8px;
+			margin-top: 15px;
+		}
+		.main-right-content{
+			width: 759px;
+			height: 225px;
+		}
+		.calendar{
+			width: 695px;
+			box-sizing: border-box;
+			padding:50px;
+			box-shadow:0px 0px 9px 0px rgba(0,0,0,0.24);
+		}
+		.calendar-title .arrow{
+			top:10px;
+			width: 90px;
+			right:17px;
+		}
+		.calendar-title .arrow span{
+			font-size: 40px;
+		}
+		.calendar-right{
+			width: 476px;
+			height: 100%;
+			box-sizing: border-box;
+			display: flex;
+			flex-wrap: wrap;
+			overflow: overlay;
+		}
+		.calendar-title{
+			padding:10px 0;
+		}
+		.calendar-right::-webkit-scrollbar {
+			display: none;
+		}
+		.calendar-right ul{
+			width: 100%;
+			background: #F1F1F1;
+			padding: 6px 16px;			
+			box-sizing: border-box;
+			margin-bottom: 10px;
+			position: relative;
+		}
+		.calendar-right ul:nth-child(2n){
+			background: #6AA666;
+		}
+		.calendar-right ul:nth-child(2n) li{
+			color:#ffffff;
+		}
+		.calendar-right ul li{
+			height: 32px;
+			line-height: 32px;
+			font-size: 16px;
+			font-family:PingFangSC-Regular;
+		}
+	 .calendar-week {
+			padding: 20px 10px 10px;
+			border: 0;
+		}
+		.calendar-date {
+			padding: 10px;
+		}
+		.calendar-week .item{
+			width:39px;
+			height: 40px;
+			font-size: 27px;
+			margin-right: 50px;
+			text-align: center;
+			color:rgba(52,72,94,0.54);
+		}
+		.calendar-week li:last-child{
+			margin-right: 0;
+		}
+		.calendar-date .item{
+			width: 39px;
+			height: 40px;
+			font-size: 25px;
+			color: #E1E4E7;
+			margin: 20px 50px 0 0;
+		} 
+		.calendar-date .item:nth-child(7n+7){
+			margin-right: 0;
+		}
+		.calendar-date .item-curMonth{
+			color:#7C86A2;
+		}
+		.calendar-date  .item-curDay{
+			background: #6AA666;
+		}
+		.breadcrumb{
+			width: 100%;
+			height: 75px;
+		}
+		.breadcrumb li{
+			float: left;
+			margin-right: 10px;
+			font-size:20px;
+			font-family:OpenSans-Regular;
+			font-weight:400;			
+			line-height:75px;
+		}
+		.breadcrumb li a{
+			color:rgba(30,130,23,1);
+		}
+		.calendar-right .tips{
+			width:103px;
+			height: 144px;
+		
+			/* display:none; */
+			position: absolute;
+			top:0;
+			right:0;
+		}
+		.calendar-right .tips ul{
+			padding: 10px 0;
+			background:rgba(0,0,0,0.6) !important; 
+		}
+		.calendar-right .tips ul li{
+			height:24px;
+			margin-bottom:8px;
+			text-align: center;
+		}
+		.calendar-right .tips a{
+			display: inline-block;
+			height: 24px;
+			padding:0 8px;
+			line-height: 24px;
+			font-family:OpenSans-SemiBold;
+			color:rgba(255,255,255,1);
+			border-radius:14px;
+			border:1px solid rgba(255,255,255,1);
+		}
+		.tips_hover_yes{
+		    border:1px solid transparent !important;
+			background-color: #6AA666;
+		}
+		.tips_hover_no{
+		    border:1px solid transparent !important;
+			background-color: #F94B5A;
+		}
+		.tips_hover_maybe{
+		    border:1px solid transparent !important;
+			background-color: #F5A623;
+		}
+		.tips_hover_notes{
+		    border:1px solid transparent !important;
+			background-color: #393D44;
+		}
+		.db{
+			width: 100%;
+			height: 100%;
+			display: none;
+			background: rgba(0,0,0,0.4);
+			position: fixed;
+			top: 0;
+			z-index: 1000;
+		}
+		.login{
+			width: 330px;
+			height: 430px;
+			background: rgba(255,255,255,1);
+			border-radius: 7px;
+			position: fixed;
+			top: 30%;
+			left: 40%;
+			z-index: 1001;
+		}
+		.login-int{
+			width: 260px;
+			height: 42px;
+			margin-top: 34px;
+			margin-left: 35px;
+			background:rgba(245,248,249,1);
+			border-radius:4px;
+			border: none;
+			padding-left: 18px;
+			box-sizing: border-box;
+		}
+
+		.login-H3{
+			font-size: 26px;
+			font-weight: 500;
+			color: rgba(57,61,68,1);
+			line-height: 77px;
+			text-align: center;
+			height: 77px;
+		}
+		.login textarea{
+			background: #F5F8F9;
+			margin-left: 33px;
+			border: none;
+			width: 260px;
+			height: 257px;
+			padding: 19px 16px;
+			box-sizing: border-box;
+		}
+		.login input{
+			display: inline-block;
+			border: none;
+			width: 260px;
+			height: 42px;
+			margin-left: 33px;
+			margin-top: 24px;
+			background: #6AA666;
+			border-radius: 4px;
+			color: #ffffff;
+			font-size: 16px;	
+		}
+		.login textarea::-webkit-input-placeholder{
+			color:#889399;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="db">
+		<div class="login">
+			<h3 class="login-H3">Leave a Note</h3>
+			<textarea name="" id="" cols="30" rows="10" placeholder="No more than 100 words"></textarea>	
+			<input type="button" value="Submit">					
+		</div>
+	</div>
+	<!-- 头部 -->
+	<div class="header" style="box-shadow:0px 2px 7px 0px rgba(0,0,0,0.5);
+	border:1px solid rgba(151,151,151,1)">
+		<div class="w1200">
+			<a class="logo" href="index.html">
+				De Anza Oaks
+			</a>
+			<div class="btns clearfix">
+				<input type="text" id="search_key" placeholder="请输入关键词">
+				<a class="btns-search" href="javascript:;"> </a>
+				<a class="btns-language" href="javascript:;">Lee</a>
+				<div class="langOv">
+					<div class="profile">
+						<a href="javascript:;">My Profile</a>
+						<a href="javascript:;">Log Out</a>
+					</div>
+				</div>
+			</div>
+			<div class="nav">
+				<ul>
+					<li class="curr">
+						<a class="on" href="index.html">Home</a>
+					</li>
+					<li>
+						<a href="javascript:;">About us</a>
+						<div class="sideNav sN1">
+							<dl class="innav">
+								<dd>
+									<a href="javascript:;">公司简介</a>
+								</dd>
+								<dd>
+									<a href="javascript:;">企业文化</a>
+								</dd>
+							</dl>
+						</div>
+					</li>
+					<li>
+						<a href="javascript:;">Docs</a>
+						<div class="sideNav sN2">
+							<dl class="innav">
+								<dd>
+									<a href="javascript:;" target="_blank">Activities</a>
+								</dd>
+								<dd>
+									<a href="javascript:;" target="_blank">News</a>
+								</dd>
+								<dd>
+									<a href="javascript:;" target="_blank">Resources</a>
+								</dd>
+								<dd>
+									<a href="javascript:;" target="_blank">Feedback</a>
+								</dd>
+								<dd>
+									<a href="javascript:;" target="_blank">Board</a>
+								</dd>
+							</dl>
+						</div>
+					</li>
+
+				</ul>
+				<span class="navline"></span>
+			</div>
+		</div>
+		<!-- 二级导航背景 -->
+		<div class="innavbg"></div>
+		<div class="mask"></div>
+		<!-- 侧边栏 -->
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="js/header.js"></script>
+		<script type="text/javascript">
+			var loc = window.location.href.toLowerCase();
+
+			$('.nav li a').each(function (i) {
+				if ($(this).attr("href") == "/") {
+					$(this).parent("li").addClass("curr").siblings("li").removeClass("curr");
+					return false;
+				} else if (loc.indexOf($(this).attr("href").replace(/\..*/, "")) > 0) {
+					$(this).parent("li").addClass("curr").siblings("li").removeClass("curr");
+					return false;
+				}
+			});
+		</script>
+	
+
+		<script type="text/javascript" src="js/list=hk02007.js" charset="gb2312"></script>
+		<script type="text/javascript">
+			var elements = hq_str_hk02007.split(",");
+			$(function () {
+				$(".uptxt").text(elements[6]); //全日最高(港元) 
+				$(".downtxt").text(elements[6]); //全日最高(港元) 
+
+				if (elements[7] > 0) {
+					$(".downtxt").hide();
+					$(".down").hide();
+				} else {
+					$(".uptxt").hide();
+					$(".up").hide();
+				}
+
+			});
+		</script>
+	</div>
+	<!-- 主体 -->
+	<div class="main">
+
+		<div class="main-top" style="margin-bottom: 35px;height: 100%;">
+			
+			<div class="w1200 pr">
+				<ul class="breadcrumb">
+					<li><a href="index.html" target="_blank" rel="noopener noreferrer">Home</a></li>
+					<li><a href="#" target="_blank" rel="noopener noreferrer"> > </a></li>
+					<li><a href="#" target="_blank" rel="noopener noreferrer"> Events Calendar</a></li>
+				</ul>
+				<div class="main-left" style="width:100%;height: 100%;">
+					<div class="main-right-content" style="width:100%;height: 626px;display: flex;justify-content: space-between">
+						<div id="calendar" class="calendar"></div>
+						<div class="calendar-right">
+							<ul>
+								<li>01/21/2019</li>
+								<li>
+									Clubhouse Booking (Confirmed) Priya Balijepalli
+								</li>
+								<li>Location: &nbsp;Clubhouse</li>
+								<li>
+									Event Added By: &nbsp;Geeta Chavan
+								</li>
+							</ul>
+							<ul>
+								<li>01/21/2019</li>
+								<li>
+									Clubhouse Booking (Confirmed) Priya Balijepalli
+								</li>
+								<li>Location: &nbsp; Clubhouse</li>
+								<li>
+									Event Added By: &nbsp;Geeta Chavan
+								</li>
+							</ul>
+							<ul>
+								<li>01/21/2019</li>
+								<li>
+									Clubhouse Booking (Confirmed) Priya Balijepalli
+								</li>
+								<li>Location: &nbsp;Clubhouse</li>
+								<li>
+									Event Added By: &nbsp;Geeta Chavan
+								</li>
+							</ul>
+							<ul>
+								<li>01/21/2019</li>
+								<li>
+									Clubhouse Booking (Confirmed) Priya Balijepalli
+								</li>
+								<li>Location: &nbsp;Clubhouse</li>
+								<li>
+									Event Added By: &nbsp;Geeta Chavan
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="js/aos.js"></script>
+	<script type="text/javascript" src="js/masterslider.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<!-- 日历插件 -->
+	<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
+	<script src="js/calendar.js"></script>
+
+	<script>
+		$(document).ready(function(){
+			var  str = `<li class="tips">
+								<ul>
+									<li><a href="#" class="Yes">Yes</a></li>
+									<li><a href="#" class="No">No</a></li>
+									<li><a href="#" class="Maybe">Maybe</a></li>
+									<li><a href="#" class="Notes">Notes</a></li>
+								</ul>					
+							</li>`;	
+			 
+			$('.calendar-right ul').mouseenter(function () {				
+				$(this).append(str)		
+				$('.Yes').hover(function(){
+					$(this).addClass('tips_hover_yes')
+				},function () { 
+					$(this).removeClass('tips_hover_yes')
+				 })
+				 $('.No').hover(function(){
+					$(this).addClass('tips_hover_no')
+				},function () { 
+					$(this).removeClass('tips_hover_no')
+				 })
+				 $('.Maybe').hover(function(){
+					$(this).addClass('tips_hover_maybe')
+				},function () { 
+					$(this).removeClass('tips_hover_maybe')
+				 })
+				 $('.Notes').hover(function(){
+					$(this).addClass('tips_hover_notes')
+				},function () { 
+					$(this).removeClass('tips_hover_notes')
+				 })
+				 $('.Notes').click(function(e){
+					 $('.db').show();
+					return false;
+				 })
+			  })
+			  document.addEventListener('click',function (e) {
+				  var _con = $('.login');
+				  if(!_con.is(e.target)&& _con.has(e.target).length === 0){
+					$('.db').hide()
+				  }
+					
+			  })
+			$('.calendar-right ul').mouseleave(function () {
+			  $('.tips').remove()		
+			})			
+		});
+	</script>
+
+	<!-- 底部 -->
+	<div class="footer">
+
+		<div class="w1200">
+
+			<div class="foot-con">
+				<p class="clearfix">
+
+				</p>
+
+			</div>
+			<script type="text/javascript">
+				//下拉菜单
+				$('body').on('click', '[name="layout-select"]', function (e) {
+					$('[name="layout-select"]').find('ul').stop().slideUp();
+					$(this).find('ul').stop().slideDown();
+					e.stopPropagation();
+				});
+				$('[name="layout-select"] li').hover(function (e) {
+					$(this).toggleClass('on');
+					e.stopPropagation();
+				});
+				$('body').on('click', '[name="layout-select"] li', function (e) {
+					var val = $(this).text();
+					$(this).parents('[name="layout-select"]').find('input').val(val);
+					$('[name="layout-select"] ul').fadeOut(10);
+					e.stopPropagation();
+				});
+				$(document).click(function () {
+					$('[name="layout-select"] ul').slideUp(200);
+				});
+				// 二维码
+				$('.wx').hover(function () {
+					$('.wxsode').stop().slideDown();
+				}, function () {
+					$('.wxsode').stop().slideUp();
+				})
+			</script>
+			<script>
+				var _hmt = _hmt || [];
+				(function () {
+					var hm = document.createElement("script");
+					hm.src = "js/hm.js-5c138214afe064d1f739fb9535e08b20.js";
+					var s = document.getElementsByTagName("script")[0];
+					s.parentNode.insertBefore(hm, s);
+				})();
+			</script>
+		</div>
+	</div>
+</body>
+
+<script>
+
+</script>
+</html>
